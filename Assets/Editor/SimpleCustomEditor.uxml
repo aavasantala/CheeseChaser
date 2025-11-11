@@ -1,7 +1,0 @@
-<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/InGame.uss?fileID=7433441132597879392&amp;guid=ce5a989479c07f34cb556aaa1efcd3ed&amp;type=3#InGame" />
-    <engine:VisualElement style="flex-grow: 1;">
-        <engine:Label text="0" name="labelMush" class="label" style="height: 59px; -unity-font-definition: resource(&apos;FlatSkin/Font/Roboto-Regular&apos;); font-size: 20px; -unity-font-style: bold; -unity-text-align: upper-left; -unity-text-outline-width: initial; -unity-text-outline-color: rgba(0, 0, 0, 0); color: rgb(255, 255, 255);" />
-        <engine:VisualElement name="Container" style="flex-grow: 1; height: 66px; width: 171px; bottom: 466px; position: absolute;" />
-    </engine:VisualElement>
-</engine:UXML>

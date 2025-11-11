@@ -1,0 +1,12 @@
+<ui:UXML xmlns="UnityEngine.UIElements" xmlns:ui="UnityEngine.UIElements" xmlns:engine="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/MainMenuStuff/MainMenu.uss?fileID=7433441132597879392&amp;guid=ea04c7982693d15438d53dd37d5e216d&amp;type=3#MainMenu" />
+    <ui:VisualElement name="root" class="root">
+        <ui:VisualElement name="bgCheese" class="bg-cheese" />
+        <ui:VisualElement name="mouseOverlay" class="mouse-overlay" />
+        <ui:Label name="titleLabel" text="CHEEEEEEEEESE CHASER!" class="title" />
+        <ui:Button name="btnStartGame" text="Start Game" class="button" />
+        <ui:Button name="btnQuit" text="Quit" class="button" />
+        
+
+    </ui:VisualElement>
+</ui:UXML>

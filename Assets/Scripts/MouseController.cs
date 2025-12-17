@@ -20,8 +20,8 @@ public class MouseController : MonoBehaviour
     [Header("Mouse Look Settings")]
     public Transform cameraTransform;
     public float mouseSensitivity = 150f;
-    public float cameraYOffsetSmall = 0.25f;
-    public float cameraYOffsetBig = 0.6f;
+    public float cameraYOffsetSmall = 0.4f;
+    public float cameraYOffsetBig = 1f;
 
 
     [Header("Other")]

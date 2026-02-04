@@ -239,9 +239,9 @@ Material:
     m_Floats:
     - _1st2nd_Shades_Feather: 0.017
     - _1st_ShadeColor_Feather: 0.013
-    - _1st_ShadeColor_Step: 0.754
+    - _1st_ShadeColor_Step: 0.842
     - _2nd_ShadeColor_Feather: 0.017
-    - _2nd_ShadeColor_Step: 0.488
+    - _2nd_ShadeColor_Step: 0.565
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ARSampler_AlphaOn: 0
@@ -271,7 +271,7 @@ Material:
     - _AutoRenderQueue: 1
     - _BaseColorOverridden: 0
     - _BaseColorVisible: 1
-    - _BaseColor_Step: 0.754
+    - _BaseColor_Step: 0.842
     - _BaseShade_Feather: 0.013
     - _Base_Speed: 0
     - _Blend: 0
@@ -434,7 +434,7 @@ Material:
     - _SecondShadeOverridden: 0
     - _SecondShadeVisible: 1
     - _Set_SystemShadowsToBase: 1
-    - _ShadeColor_Step: 0.488
+    - _ShadeColor_Step: 0.565
     - _Smoothness: 0.55
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
@@ -465,6 +465,16 @@ Material:
     - _SupportDecals: 1
     - _Surface: 0
     - _SurfaceType: 0
+    - _TessEdgeLength: 5
+    - _TessExtrusionAmount: 0
+    - _TessPhongStrength: 0.5
+    - _TessellationBackFaceCullEpsilon: -0.25
+    - _TessellationFactor: 4
+    - _TessellationFactorMaxDistance: 50
+    - _TessellationFactorMinDistance: 20
+    - _TessellationFactorTriangleSize: 100
+    - _TessellationMode: 0
+    - _TessellationShapeFactor: 0.75
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
     - _Thickness: 1

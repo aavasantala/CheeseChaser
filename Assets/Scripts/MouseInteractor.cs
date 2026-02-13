@@ -5,7 +5,6 @@ public class MouseInteractor : MonoBehaviour
 {
     [Header("References")]
     public Camera playerCamera;
-    public UIManager uiManager; // optional, for crosshair updates
 
     [Header("Camera during interaction")]
     public Vector3 cameraOffset = new Vector3(0, 1.0f, -2f); // behind the player
@@ -29,20 +28,24 @@ public class MouseInteractor : MonoBehaviour
     // Camera original position & rotation for restoring after interaction
     private Vector3 originalCamLocalPos;
     private Quaternion originalCamLocalRot;
+    
+    private IngameUI _inGameUI;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
         movementScript = GetComponent<MouseController>();
+
+        _inGameUI = UIManager.Instance.GetInGameUI().GetComponent<IngameUI>();
     }
 
     void Update()
     {
-        isSmall = movementScript != null && movementScript.IsSmall();
+        isSmall = movementScript && movementScript.IsSmall();
 
         if (isSmall)
         {
-            if (uiManager != null) uiManager.SetCanInteract(false);
+            _inGameUI?.SetCanInteract(false);
             return;
         }
 
@@ -78,8 +81,8 @@ public class MouseInteractor : MonoBehaviour
             }
         }
 
-        if (uiManager != null)
-            uiManager.SetCanInteract(canInteract);
+        if (_inGameUI != null)
+            _inGameUI.SetCanInteract(canInteract);
     }
 
     void StartInteraction(RaycastHit hit)
@@ -100,8 +103,8 @@ public class MouseInteractor : MonoBehaviour
 
         movementScript.SetLookEnabled(false);
 
-        if (uiManager != null)
-            uiManager.SetCanInteract(false);
+        if (_inGameUI != null)
+            _inGameUI.SetCanInteract(false);
     }
     #endregion
 

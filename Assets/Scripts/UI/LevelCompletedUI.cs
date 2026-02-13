@@ -90,6 +90,7 @@ public class LevelCompletedUI : MonoBehaviour
 
     private void RestartLevel()
     {
+        Debug.Log("Restart level");
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

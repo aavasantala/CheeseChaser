@@ -37,17 +37,14 @@ public class MouseController : MonoBehaviour
     private Camera mainCam;
     private bool canLook = true;
 
-    public UIManager uiManager;
-    
 
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        mainCam= GetComponent<Camera>();
+        // mainCam= GetComponent<Camera>();
         SizeToSmall(true);
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        // Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.visible = false;
     }
 
     void Update()
@@ -70,6 +67,7 @@ public class MouseController : MonoBehaviour
         cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
     }
+    
     void MovementHandler()
     {
         //is mouse on ground?
@@ -120,7 +118,7 @@ public class MouseController : MonoBehaviour
         {
             transform.localScale = smallSize;
             characterController.height = 0.5f;
-            characterController.center = new Vector3(0, characterController.height/2, 0);
+            // characterController.center = new Vector3(0, characterController.height/2, 0);
             cameraTransform.localPosition = new Vector3(0, cameraYOffsetSmall, 0);
         }
         //otherwise make the mouse big
@@ -128,7 +126,7 @@ public class MouseController : MonoBehaviour
         {
             transform.localScale = bigSize;
             characterController.height = 1.2f;
-            characterController.center = new Vector3(0, 0.6f, 0);
+            // characterController.center = new Vector3(0, 0.6f, 0);
             cameraTransform.localPosition = new Vector3(0, characterController.height / 2, 0);
         }
     }

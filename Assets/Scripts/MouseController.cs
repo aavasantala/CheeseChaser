@@ -38,6 +38,9 @@ public class MouseController : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+
+        LevelManager.Instance.onMushroomTaken += OnMushroomTaken;
+        LevelManager.Instance.onBoxInRightPlace += OnBoxInRightPlace;
         
         SizeToSmall(true);
     }
@@ -46,7 +49,6 @@ public class MouseController : MonoBehaviour
     {
         CameraHandler();
         MovementHandler();
-        SizeChangerCheck();
     }
 
 
@@ -93,16 +95,6 @@ public class MouseController : MonoBehaviour
         characterController.Move(velocity*Time.deltaTime);
     }
     
-    void SizeChangerCheck()
-    {
-        //here stuff for mushroom, now just a placeholder
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            isSmall = !isSmall;
-            SizeToSmall(isSmall);
-        }
-    }
-
     //This is the method that changes the size of the mouse
     //Usable with SizeToSmall(true) -> that then makes the mouse small, SizeToSmall(false) for big mouse.
     void SizeToSmall(bool small)
@@ -114,9 +106,21 @@ public class MouseController : MonoBehaviour
         var cameraHeightOffset = (small) ? new Vector3(0, cameraYOffsetSmall, 0) : new Vector3(0, cameraYOffsetBig, 0);
         cameraTransform.localScale = cameraHeightOffset;
 
+        isSmall = small;
+
         // In case we need to change the center of the character, we can uncomment it here
         // var characterControllerCenter = (small) ? new Vector3(0, characterController.height / 2, 0) : new Vector3(0, 0.6f, 0);
         // characterController.center = characterControllerCenter;
+    }
+
+    private void OnMushroomTaken()
+    {
+        SizeToSmall(false);
+    }
+    
+    private void OnBoxInRightPlace()
+    {
+        SizeToSmall(true);
     }
 
     public bool IsSmall()
@@ -124,9 +128,9 @@ public class MouseController : MonoBehaviour
         return isSmall;
     }
 
-    public void SetLookEnabled(bool enabled)
-    {
-        canLook = enabled; // add this bool
-    }
+    // public void SetLookEnabled(bool enabled)
+    // {
+    //     canLook = enabled; // add this bool
+    // }
 
 }

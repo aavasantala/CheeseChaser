@@ -16,6 +16,8 @@ public class LevelManager : MonoBehaviour
     }
 
     public UnityAction<int> onMushroomNumberChange;
+    public UnityAction onMushroomTaken;
+    public UnityAction onBoxInRightPlace;
     
     private int _mushroomNumber;
 

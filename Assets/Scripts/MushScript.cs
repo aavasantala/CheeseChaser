@@ -13,8 +13,8 @@ public class MushScript : MonoBehaviour
 
     private void MushroomCollection()
     {
-        Debug.Log("wow");
         LevelManager.Instance.MushroomNumber++;
+        LevelManager.Instance.onMushroomTaken?.Invoke();
         Destroy(gameObject);
     }
 }

@@ -33,8 +33,6 @@ public class MouseInteractor : MonoBehaviour
     private IngameUI _inGameUI;
     private bool _isPull;
 
-    private readonly Dictionary<RaycastHit, Rigidbody> _raycastHitCache = new();
-
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -67,8 +65,7 @@ public class MouseInteractor : MonoBehaviour
         
     }
 
-    #region Interaction Raycast
-    void HandleInteractionRaycast()
+    private void HandleInteractionRaycast()
     {
         bool canInteract = false;
 
@@ -77,65 +74,61 @@ public class MouseInteractor : MonoBehaviour
         {
             if (hit.collider.CompareTag("Interactable"))
             {
-                // Add raycasthit to cache if it has not existed
-                if (!_raycastHitCache.ContainsKey(hit))
-                {
-                    _raycastHitCache[hit] = hit.collider.attachedRigidbody;
-                }
-
-                if (_isPull)
-                {
-                    PullObject(_raycastHitCache[hit]);
-                }
+                if(!currentRb) currentRb = hit.collider.attachedRigidbody;
+                if (_isPull) PullObject(currentRb);
                 canInteract = !isSmall;
+            }
+            else
+            {
+                currentRb = null;
             }
         }
         _inGameUI?.SetCanInteract(canInteract);
     }
-
-    void StartInteraction(RaycastHit hit)
-    {
-        isInteracting = true;
-        currentTarget = hit.collider.transform;
-        currentRb = hit.collider.attachedRigidbody;
-        
-        if (currentRb != null)
-        {
-            currentRb.angularVelocity = Vector3.zero;
-            currentRb.constraints = RigidbodyConstraints.FreezeRotation;
-        }
-        
-        // Save original camera position & rotation
-        originalCamLocalPos = playerCamera.transform.localPosition;
-        originalCamLocalRot = playerCamera.transform.localRotation;
-        
-        movementScript.SetLookEnabled(false);
-        
-        if (_inGameUI != null)
-            _inGameUI.SetCanInteract(false);
-    }
     
-    void StopInteraction()
-    {
-        isInteracting = false;
-        currentTarget = null;
-        
-        if (currentRb != null)
-        {
-            currentRb.linearVelocity = Vector3.zero;
-            currentRb.constraints = RigidbodyConstraints.None;
-        }
-        currentRb = null;
-        
-        movementScript.SetLookEnabled(true);
-        
-        // Restore camera
-        playerCamera.transform.localPosition = originalCamLocalPos;
-        playerCamera.transform.localRotation = originalCamLocalRot;
-    }
-    #endregion
+    #region Legacy
 
-    #region Active Interaction
+    // void StartInteraction(RaycastHit hit)
+    // {
+    //     isInteracting = true;
+    //     currentTarget = hit.collider.transform;
+    //     currentRb = hit.collider.attachedRigidbody;
+    //     
+    //     if (currentRb != null)
+    //     {
+    //         currentRb.angularVelocity = Vector3.zero;
+    //         currentRb.constraints = RigidbodyConstraints.FreezeRotation;
+    //     }
+    //     
+    //     // Save original camera position & rotation
+    //     originalCamLocalPos = playerCamera.transform.localPosition;
+    //     originalCamLocalRot = playerCamera.transform.localRotation;
+    //     
+    //     movementScript.SetLookEnabled(false);
+    //     
+    //     if (_inGameUI != null)
+    //         _inGameUI.SetCanInteract(false);
+    // }
+    
+    // void StopInteraction()
+    // {
+    //     isInteracting = false;
+    //     currentTarget = null;
+    //     
+    //     if (currentRb != null)
+    //     {
+    //         currentRb.linearVelocity = Vector3.zero;
+    //         currentRb.constraints = RigidbodyConstraints.None;
+    //     }
+    //     currentRb = null;
+    //     
+    //     movementScript.SetLookEnabled(true);
+    //     
+    //     // Restore camera
+    //     playerCamera.transform.localPosition = originalCamLocalPos;
+    //     playerCamera.transform.localRotation = originalCamLocalRot;
+    // }
+    
     void HandleActiveInteraction()
     {
         // if (currentTarget == null)
@@ -172,9 +165,7 @@ public class MouseInteractor : MonoBehaviour
         //     StopInteraction();
         // }
     }
-    #endregion
-
-    #region Camera Control
+    
     void HandleInteractionCamera()
     {
         if (currentTarget == null) return;
@@ -230,4 +221,5 @@ public class MouseInteractor : MonoBehaviour
         
         body.linearVelocity = direction * pushPullSpeed;
     }
+   
 }

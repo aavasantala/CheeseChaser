@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour
 
     [Header("UI Objects")] 
     [SerializeField] private UIDocument inGameUI;
-    [SerializeField] private UIDocument endGameUI;
+    [SerializeField] private UIDocument levelCompletedUI;
 
     private void Awake()
     {
@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
     private void HideAllUI()
     {
         inGameUI.rootVisualElement.style.display = DisplayStyle.None;
-        endGameUI.rootVisualElement.style.display = DisplayStyle.None;
+        levelCompletedUI.rootVisualElement.style.display = DisplayStyle.None;
     }
 
 
@@ -36,7 +36,7 @@ public class UIManager : MonoBehaviour
     public void ShowEndGameUI(bool show)
     {
         HideAllUI();
-        endGameUI.rootVisualElement.style.display = DisplayStyle.Flex;
+        levelCompletedUI.rootVisualElement.style.display = DisplayStyle.Flex;
     }
     
     private void OnGameStateChange(GameManager.GameState state)
@@ -59,5 +59,5 @@ public class UIManager : MonoBehaviour
     }
 
     public UIDocument GetInGameUI() => inGameUI;
-    public UIDocument GetEndGameUI() => endGameUI;
+    public UIDocument GetEndGameUI() => levelCompletedUI;
 }

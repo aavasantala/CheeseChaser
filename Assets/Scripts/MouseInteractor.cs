@@ -201,7 +201,6 @@ public class MouseInteractor : MonoBehaviour
     {
         Rigidbody body = hit.collider.attachedRigidbody;
         if (body == null || body.isKinematic || isSmall || _isPull) return;
-
         Vector3 pushDirection = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
         PushObject(body, pushDirection);
         // body.linearVelocity = hit.moveDirection * pushPullSpeed;

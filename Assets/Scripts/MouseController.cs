@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -102,12 +103,16 @@ public class MouseController : MonoBehaviour
     void SizeToSmall(bool small)
     {
         //if it gets true from the () then makes mouse small
-        transform.localScale = (small) ? smallSize : bigSize;
-        characterController.height = (small) ? 0.5f : 1.2f;
+        var sequence = DOTween.Sequence();
+        sequence.Join(transform.DOScale(small ? smallSize : bigSize, 0.3f));
+        sequence.Join(cameraTransform.DOScale(small
+            ? new Vector3(0, cameraYOffsetSmall, 0)
+            : new Vector3(0, cameraYOffsetBig, 0), 0.3f));
+        // transform.localScale = (small) ? smallSize : bigSize;
+        // characterController.height = (small) ? 0.5f : 1.2f;
 
-        var cameraHeightOffset = (small) ? new Vector3(0, cameraYOffsetSmall, 0) : new Vector3(0, cameraYOffsetBig, 0);
-        cameraTransform.localScale = cameraHeightOffset;
-
+        // var cameraHeightOffset = (small) ? new Vector3(0, cameraYOffsetSmall, 0) : new Vector3(0, cameraYOffsetBig, 0);
+        // cameraTransform.localScale = cameraHeightOffset;
         isSmall = small;
 
         // In case we need to change the center of the character, we can uncomment it here

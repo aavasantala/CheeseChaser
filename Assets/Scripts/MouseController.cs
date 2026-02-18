@@ -41,9 +41,11 @@ public class MouseController : MonoBehaviour
 
         LevelManager.Instance.onMushroomTaken += OnMushroomTaken;
         LevelManager.Instance.onBoxInRightPlace += OnBoxInRightPlace;
+        LevelManager.Instance.onPlayerOutOfZone += OnPlayerOutOfZone;
         
         SizeToSmall(true);
     }
+
 
     void Update()
     {
@@ -123,6 +125,13 @@ public class MouseController : MonoBehaviour
         SizeToSmall(true);
     }
 
+    private void OnPlayerOutOfZone()
+    {
+        characterController.enabled = false;
+        transform.position = LevelManager.Instance.PlayerStartPosition;
+        characterController.enabled = true;
+    }
+    
     public bool IsSmall()
     {
         return isSmall;

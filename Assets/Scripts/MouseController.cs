@@ -94,6 +94,11 @@ public class MouseController : MonoBehaviour
             velocity.y = Mathf.Sqrt(smallMouseJumpHeight * -2f * gravity);
         }
 
+        if (characterController.collisionFlags == CollisionFlags.Above)
+        {
+            velocity.y = -1f;
+        }
+
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity*Time.deltaTime);
     }

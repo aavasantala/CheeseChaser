@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
@@ -26,5 +27,14 @@ public class BoxDetector : MonoBehaviour
         // Set box interact to false so player cannot move it out of the way after 
         boxController.Interactable = false;
         LevelManager.Instance.onBoxInRightPlace?.Invoke();
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        if (boxToDetect != null)
+        {
+            Gizmos.DrawSphere(boxToDetect.transform.position, 0.3f);
+        }
     }
 }

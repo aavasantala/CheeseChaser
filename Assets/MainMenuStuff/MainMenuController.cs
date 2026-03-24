@@ -35,7 +35,7 @@ public class MainMenuController : MonoBehaviour
     void StartGame()
     {
         Debug.Log("Start Game clicked");
-        SceneManager.LoadScene("BCAKUPO");
+        SceneManager.LoadScene("Tutorial");
     }
 
     void QuitGame()

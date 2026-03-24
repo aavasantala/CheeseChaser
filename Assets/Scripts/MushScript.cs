@@ -2,26 +2,19 @@ using UnityEngine;
 
 public class MushScript : MonoBehaviour
 {
-    public int mushroomCount;
-    public UIManager manager;
-    
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("enter");
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
-            Debug.Log("enter player");
-            MushCollection();
-        }
+            MushroomCollection();
+        } 
     }
 
-    void MushCollection()
+    private void MushroomCollection()
     {
-        Debug.Log("wow");
-        mushroomCount++;
-        manager.UpdateMushroomCount(mushroomCount);
+        LevelManager.Instance.MushroomNumber++;
+        LevelManager.Instance.onMushroomTaken?.Invoke();
         Destroy(gameObject);
-
     }
 }

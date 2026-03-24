@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -5,7 +6,6 @@ public class MouseInteractor : MonoBehaviour
 {
     [Header("References")]
     public Camera playerCamera;
-    public UIManager uiManager; // optional, for crosshair updates
 
     [Header("Camera during interaction")]
     public Vector3 cameraOffset = new Vector3(0, 1.0f, -2f); // behind the player
@@ -29,37 +29,43 @@ public class MouseInteractor : MonoBehaviour
     // Camera original position & rotation for restoring after interaction
     private Vector3 originalCamLocalPos;
     private Quaternion originalCamLocalRot;
+    
+    private IngameUI _inGameUI;
+    private bool _isPull;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
         movementScript = GetComponent<MouseController>();
+
+        _inGameUI = UIManager.Instance.GetInGameUI().GetComponent<IngameUI>();
     }
 
     void Update()
     {
-        isSmall = movementScript != null && movementScript.IsSmall();
-
+        isSmall = movementScript && movementScript.IsSmall();
+        _isPull = Input.GetKey(KeyCode.E);
+        
         if (isSmall)
         {
-            if (uiManager != null) uiManager.SetCanInteract(false);
-            return;
+            _inGameUI?.SetCanInteract(false);
         }
-
-        if (isInteracting)
-        {
-            RotatePlayerTowardsInteractable();
-            HandleActiveInteraction();
-            HandleInteractionCamera();
-        }
-        else
-        {
-            HandleInteractionRaycast();
-        }
+        
+        HandleInteractionRaycast();
+        // if (isInteracting)
+        // {
+        //     RotatePlayerTowardsInteractable();
+        //     HandleActiveInteraction();
+        //     HandleInteractionCamera();
+        // }
+        // else
+        // {
+        //     HandleInteractionRaycast();
+        // }
+        
     }
 
-    #region Interaction Raycast
-    void HandleInteractionRaycast()
+    private void HandleInteractionRaycast()
     {
         bool canInteract = false;
 
@@ -68,82 +74,98 @@ public class MouseInteractor : MonoBehaviour
         {
             if (hit.collider.CompareTag("Interactable"))
             {
-                canInteract = true;
-
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    StartInteraction(hit);
-                    return;
-                }
+                if(!currentRb) currentRb = hit.collider.attachedRigidbody;
+                if (_isPull) PullObject(currentRb);
+                canInteract = !isSmall;
+            }
+            else
+            {
+                currentRb = null;
             }
         }
-
-        if (uiManager != null)
-            uiManager.SetCanInteract(canInteract);
+        _inGameUI?.SetCanInteract(canInteract);
     }
+    
+    #region Legacy
 
-    void StartInteraction(RaycastHit hit)
-    {
-        isInteracting = true;
-        currentTarget = hit.collider.transform;
-        currentRb = hit.collider.attachedRigidbody;
-
-        if (currentRb != null)
-        {
-            currentRb.angularVelocity = Vector3.zero;
-            currentRb.constraints = RigidbodyConstraints.FreezeRotation;
-        }
-
-        // Save original camera position & rotation
-        originalCamLocalPos = playerCamera.transform.localPosition;
-        originalCamLocalRot = playerCamera.transform.localRotation;
-
-        movementScript.SetLookEnabled(false);
-
-        if (uiManager != null)
-            uiManager.SetCanInteract(false);
-    }
-    #endregion
-
-    #region Active Interaction
+    // void StartInteraction(RaycastHit hit)
+    // {
+    //     isInteracting = true;
+    //     currentTarget = hit.collider.transform;
+    //     currentRb = hit.collider.attachedRigidbody;
+    //     
+    //     if (currentRb != null)
+    //     {
+    //         currentRb.angularVelocity = Vector3.zero;
+    //         currentRb.constraints = RigidbodyConstraints.FreezeRotation;
+    //     }
+    //     
+    //     // Save original camera position & rotation
+    //     originalCamLocalPos = playerCamera.transform.localPosition;
+    //     originalCamLocalRot = playerCamera.transform.localRotation;
+    //     
+    //     movementScript.SetLookEnabled(false);
+    //     
+    //     if (_inGameUI != null)
+    //         _inGameUI.SetCanInteract(false);
+    // }
+    
+    // void StopInteraction()
+    // {
+    //     isInteracting = false;
+    //     currentTarget = null;
+    //     
+    //     if (currentRb != null)
+    //     {
+    //         currentRb.linearVelocity = Vector3.zero;
+    //         currentRb.constraints = RigidbodyConstraints.None;
+    //     }
+    //     currentRb = null;
+    //     
+    //     movementScript.SetLookEnabled(true);
+    //     
+    //     // Restore camera
+    //     playerCamera.transform.localPosition = originalCamLocalPos;
+    //     playerCamera.transform.localRotation = originalCamLocalRot;
+    // }
+    
     void HandleActiveInteraction()
     {
-        if (currentTarget == null)
-        {
-            StopInteraction();
-            return;
-        }
-
-        float distance = Vector3.Distance(transform.position, currentTarget.position);
-        if (distance > interactBreakDistance)
-        {
-            StopInteraction();
-            return;
-        }
-
-        float vertical = Input.GetAxis("Vertical");
-        Vector3 dir = (currentTarget.position - transform.position).normalized;
-
-        // Move object
-        if (currentRb != null && Mathf.Abs(vertical) > 0.01f)
-        {
-            Vector3 targetVelocity = dir * vertical * pushPullSpeed;
-            targetVelocity.y = currentRb.linearVelocity.y; // preserve gravity
-            currentRb.linearVelocity = targetVelocity;
-
-            // Move mouse with object
-            controller.Move(dir * vertical * Time.deltaTime * pushPullSpeed);
-        }
+        // if (currentTarget == null)
+        // {
+        //     StopInteraction();
+        //     return;
+        // }
+        //
+        // float distance = Vector3.Distance(transform.position, currentTarget.position);
+        // if (distance > interactBreakDistance)
+        // {
+        //     StopInteraction();
+        //     return;
+        // }
+        //
+        // float vertical = Input.GetAxis("Vertical");
+        // Vector3 dir = (currentTarget.position - transform.position).normalized;
+        //
+        // // Move object
+        // if (currentRb != null && Mathf.Abs(vertical) > 0.01f)
+        // {
+        //     Vector3 targetVelocity = dir * vertical * pushPullSpeed;
+        //     targetVelocity.y = currentRb.linearVelocity.y; // preserve gravity
+        //     currentRb.linearVelocity = targetVelocity;
+        //
+        //     // Move mouse with object
+        //     controller.Move(dir * vertical * Time.deltaTime * pushPullSpeed);
+        // }
+        
 
         // Stop interaction manually
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            StopInteraction();
-        }
+        // if (Input.GetKeyDown(KeyCode.E))
+        // {
+        //     StopInteraction();
+        // }
     }
-    #endregion
-
-    #region Camera Control
+    
     void HandleInteractionCamera()
     {
         if (currentTarget == null) return;
@@ -173,23 +195,30 @@ public class MouseInteractor : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
     }
     #endregion
-
-    void StopInteraction()
+    
+    //TODO: (Note) If you want to use the old way of push stuff, you can comment out this one
+    private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        isInteracting = false;
-        currentTarget = null;
-
-        if (currentRb != null)
-        {
-            currentRb.linearVelocity = Vector3.zero;
-            currentRb.constraints = RigidbodyConstraints.None;
-        }
-        currentRb = null;
-
-        movementScript.SetLookEnabled(true);
-
-        // Restore camera
-        playerCamera.transform.localPosition = originalCamLocalPos;
-        playerCamera.transform.localRotation = originalCamLocalRot;
+        Rigidbody body = hit.collider.attachedRigidbody;
+        if (body == null || body.isKinematic || isSmall || _isPull) return;
+        Vector3 pushDirection = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+        PushObject(body, pushDirection);
+        // body.linearVelocity = hit.moveDirection * pushPullSpeed;
     }
+
+    private void PullObject(Rigidbody body)
+    {
+        if (body == null || body.isKinematic || isSmall) return;
+        
+        Vector3 towardPlayerDirection = (transform.position - body.transform.position).normalized;
+        body.linearVelocity = towardPlayerDirection * pushPullSpeed;
+    }
+
+    private void PushObject(Rigidbody body, Vector3 direction)
+    {
+        if (body == null || body.isKinematic || isSmall) return;
+        
+        body.linearVelocity = direction * pushPullSpeed;
+    }
+   
 }

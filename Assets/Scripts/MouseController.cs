@@ -16,6 +16,7 @@ public class MouseController : MonoBehaviour
     [Header("Settings for mouse size")]
     [SerializeField] private Vector3 smallSize = new Vector3(0.25f, 0.25f, 0.25f);
     [SerializeField] private Vector3 bigSize = new Vector3(0.40f, 0.80f, 0.40f);
+    [SerializeField, Range(1f, 30f)] private float sizeCoolDown = 20f;
 
     [Header("Mouse Look Settings")]
     [SerializeField] private Transform cameraTransform;
@@ -34,26 +35,27 @@ public class MouseController : MonoBehaviour
     private Camera mainCam;
     private bool canLook = true;
     private bool isPull = false;
+    private bool _startCoolDown = false;
 
+    private float _currentTimeCooldown;
 
     void Start()
     {
         characterController = GetComponent<CharacterController>();
 
         LevelManager.Instance.onMushroomTaken += OnMushroomTaken;
-        LevelManager.Instance.onBoxInRightPlace += OnBoxInRightPlace;
+        // LevelManager.Instance.onBoxInRightPlace += OnBoxInRightPlace;
         LevelManager.Instance.onPlayerOutOfZone += OnPlayerOutOfZone;
         
         SizeToSmall(true);
     }
 
-
     void Update()
     {
         CameraHandler();
         MovementHandler();
+        SizeHandler();
     }
-
 
     void CameraHandler()
     {
@@ -102,6 +104,18 @@ public class MouseController : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity*Time.deltaTime);
     }
+
+    private void SizeHandler()
+    {
+        if (!_startCoolDown) return;
+        
+        _currentTimeCooldown -= Time.deltaTime;
+        if (_currentTimeCooldown <= 0f)
+        {
+            SizeToSmall(true);
+            _startCoolDown = false;
+        }
+    }
     
     //This is the method that changes the size of the mouse
     //Usable with SizeToSmall(true) -> that then makes the mouse small, SizeToSmall(false) for big mouse.
@@ -128,6 +142,8 @@ public class MouseController : MonoBehaviour
     private void OnMushroomTaken()
     {
         SizeToSmall(false);
+        _startCoolDown = true;
+        _currentTimeCooldown = sizeCoolDown;
     }
     
     private void OnBoxInRightPlace()

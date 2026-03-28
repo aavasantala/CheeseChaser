@@ -35,8 +35,9 @@ public class MouseController : MonoBehaviour
     private Camera mainCam;
     private bool canLook = true;
     private bool isPull = false;
+    
     private bool _startCoolDown = false;
-
+    private bool _canGrow = false;
     private float _currentTimeCooldown;
 
     void Start()
@@ -52,6 +53,11 @@ public class MouseController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F) && _canGrow)
+        {
+            _canGrow = false;
+            GrowSize();
+        }
         CameraHandler();
         MovementHandler();
         SizeHandler();
@@ -140,6 +146,14 @@ public class MouseController : MonoBehaviour
     }
 
     private void OnMushroomTaken()
+    {
+        // SizeToSmall(false);
+        // _startCoolDown = true;
+        // _currentTimeCooldown = sizeCoolDown;
+        _canGrow = true;
+    }
+
+    private void GrowSize()
     {
         SizeToSmall(false);
         _startCoolDown = true;

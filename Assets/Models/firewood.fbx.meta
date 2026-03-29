@@ -3,7 +3,12 @@ guid: 5f533584cbfeda04db2a17e2bd4ffb7a
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: firewood_texture
+    second: {fileID: 2800000, guid: 78d4a080eb4f0d74ba3f5a18ae317513, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -4,11 +4,15 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
-    private Button btnStartGame;
-    private Button btnQuit;
 
+    
+    private Button btnStartGame;
+    private Button btnSettings;
+    private Button btnQuit;
+    public PanelSettings panelSettings;
     void OnEnable()
     {
+        
         var uiDocument = GetComponent<UIDocument>();
         if (uiDocument == null)
         {
@@ -17,8 +21,10 @@ public class MainMenuController : MonoBehaviour
         }
 
         var root = uiDocument.rootVisualElement;
+        
 
         btnStartGame = root.Q<Button>("btnStartGame");
+        btnSettings = root.Q<Button>("btnSettings");
         btnQuit = root.Q<Button>("btnQuit");
 
         if (btnStartGame != null)
@@ -29,13 +35,18 @@ public class MainMenuController : MonoBehaviour
         if (btnQuit != null)
             btnQuit.clicked += QuitGame;
         else
-            Debug.LogError("btnQuit not found!");
+
+            Debug.LogError("btnSettings not found!");
+        if (btnSettings != null)
+            btnSettings.clicked += Settings;
+        else
+            Debug.LogError("btnSettings not found!");
     }
 
     void StartGame()
     {
         Debug.Log("Start Game clicked");
-        SceneManager.LoadScene("Tutorial");
+        //here goes stuff for the level select stuff
     }
 
     void QuitGame()
@@ -46,5 +57,11 @@ public class MainMenuController : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    void Settings()
+    {
+        Debug.Log("Settings clicked");
+        //here stuff for settings
     }
 }

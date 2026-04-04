@@ -1,9 +1,9 @@
 <ui:UXML xmlns="UnityEngine.UIElements" xmlns:ui="UnityEngine.UIElements" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="UnityEngine.UIElements/UXMLSchema.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/GameWin/LevelComplete.uss?fileID=7433441132597879392&amp;guid=71ab91c1cf48c374498df2ac82a5fb29&amp;type=3#LevelComplete" />
+    <Style src="project://database/Assets/GameWin/LevelComplete.uss?fileID=7433441132597879392&amp;guid=71ab91c1cf48c374498df2ac82a5fb29&amp;type=3#LevelComplete"/>
     <ui:VisualElement name="root" class="root">
-        <ui:Label name="levelCompleteText" text="Level Completed!" class="title" />
-        <ui:Button name="btnRestart" text="Restart" class="button" />
-        <ui:Button name="btnMainMenu" text="Main Menu" class="button" />
-        <ui:Button name="btnNextLevel" text="Next Level" class="button" />
+        <ui:Label name="levelCompleteText" text="Level Completed!" class="title" style="scale: 2 2; top: -157px;"/>
+        <ui:Button name="btnRestart" text="Restart" class="button" style="scale: 2 2; top: -101px;"/>
+        <ui:Button name="btnMainMenu" text="Main Menu" class="button" style="scale: 2 2; top: -43px;"/>
+        <ui:Button name="btnNextLevel" text="Next Level" class="button" style="scale: 2 2; top: 13px;"/>
     </ui:VisualElement>
 </ui:UXML>

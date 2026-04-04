@@ -1,2 +1,14 @@
 fileFormatVersion: 2
 guid: f1a0fe122d0bdd4e0aeab9f4358ada9d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - defaultCrosshair: {fileID: 21300000, guid: 5bc5a2954bdfedf47bc8b0385471be1d, type: 3}
+  - interactCrosshair: {fileID: 21300000, guid: 546898b17dbeaa44d938018fd8980748, type: 3}
+  - panelSettings: {fileID: 11400000, guid: 46b5887b0e1577e4bb5c423fbad39d09, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -3,11 +3,7 @@
     height: 100%;
 }
 
-#mushroomCounter {
-    font-size: 28px;
-    color: white;
-    -unity-font-style: bold;
-}
+
 
 #crosshair {
     transition: background-color 0.1s ease, width 0.1s ease, height 0.1s ease;

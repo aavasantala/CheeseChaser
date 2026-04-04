@@ -8,6 +8,8 @@ public class IngameUI : MonoBehaviour
     [SerializeField] private  Sprite defaultCrosshair;
     [SerializeField] private Sprite interactCrosshair;
     
+    public PanelSettings panelSettings;
+
     private Label _mushroomCounter;
     private VisualElement _crosshair;
 

@@ -9,6 +9,7 @@ TagManager:
   - Moveable Box
   - Mush
   - Interactable
+  - FallCan
   layers:
   - Default
   - TransparentFX

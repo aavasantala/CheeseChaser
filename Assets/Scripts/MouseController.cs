@@ -1,5 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
 
 [RequireComponent(typeof(CharacterController))]
 public class MouseController : MonoBehaviour
@@ -44,10 +46,12 @@ public class MouseController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
 
         LevelManager.Instance.onMushroomTaken += OnMushroomTaken;
-        // LevelManager.Instance.onBoxInRightPlace += OnBoxInRightPlace;
+        
         LevelManager.Instance.onPlayerOutOfZone += OnPlayerOutOfZone;
         
         SizeToSmall(true);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
@@ -115,6 +119,10 @@ public class MouseController : MonoBehaviour
             SizeToSmall(true);
             _startCoolDown = false;
         }
+        if (!isSmall&& Input.GetKeyDown(KeyCode.F))
+        {
+            SizeToSmall(true);
+        }
     }
     
     //This is the method that changes the size of the mouse
@@ -144,11 +152,6 @@ public class MouseController : MonoBehaviour
         SizeToSmall(false);
         _startCoolDown = true;
         _currentTimeCooldown = sizeCoolDown;
-    }
-    
-    private void OnBoxInRightPlace()
-    {
-        SizeToSmall(true);
     }
 
     private void OnPlayerOutOfZone()

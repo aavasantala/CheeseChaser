@@ -33,6 +33,11 @@ public class MouseInteractor : MonoBehaviour
     private IngameUI _inGameUI;
     private bool _isPull;
 
+
+    //this will be elsewhere, just put it here for now (THIS WHOLE THING)
+    public GameObject can;
+    
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -210,6 +215,8 @@ public class MouseInteractor : MonoBehaviour
     {
         if (body == null || body.isKinematic || isSmall) return;
         
+        
+
         Vector3 towardPlayerDirection = (transform.position - body.transform.position).normalized;
         body.linearVelocity = towardPlayerDirection * pushPullSpeed;
     }
@@ -220,5 +227,5 @@ public class MouseInteractor : MonoBehaviour
         
         body.linearVelocity = direction * pushPullSpeed;
     }
-   
+
 }

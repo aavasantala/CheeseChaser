@@ -100,9 +100,11 @@ public class LevelCompletedUI : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
-
+    //this needs to refer to the next level
     private void NextLevel()
     {
         Debug.Log("[LevelCompletedUI] Next Level button pressed. Not implemented.");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1f;
     }
 }

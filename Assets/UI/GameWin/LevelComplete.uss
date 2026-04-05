@@ -10,7 +10,7 @@
 .title {
     font-size: 40px;
     color: white;
-    unity-text-align: middle;
+    -unity-text-align: middle-center;
     margin-bottom: 30px;
 }
 
@@ -22,5 +22,5 @@
     color: white;
     background-color: rgb(30, 30, 30);
     border-radius: 8px;
-    unity-font-style: bold;
+    -unity-font-style: bold;
 }

@@ -4,12 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
-
+    public UIDocument settingsUI;
     
     private Button btnStartGame;
     private Button btnSettings;
     private Button btnQuit;
-    public PanelSettings panelSettings;
+    
     void OnEnable()
     {
         
@@ -46,7 +46,7 @@ public class MainMenuController : MonoBehaviour
     void StartGame()
     {
         Debug.Log("Start Game clicked");
-        //here goes stuff for the level select stuff
+        SceneManager.LoadScene("Level1");
     }
 
     void QuitGame()
@@ -62,6 +62,8 @@ public class MainMenuController : MonoBehaviour
     void Settings()
     {
         Debug.Log("Settings clicked");
-        //here stuff for settings
+        
+        settingsUI.gameObject.SetActive(true);
+        this.gameObject.SetActive(false);
     }
 }

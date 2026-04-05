@@ -3,8 +3,13 @@
     height: 100%;
 }
 
-
-
 #crosshair {
     transition: background-color 0.1s ease, width 0.1s ease, height 0.1s ease;
+}
+
+.unity-progress-bar {
+}
+
+.unity-progress-bar__progress{
+    background-color: yellow;
 }

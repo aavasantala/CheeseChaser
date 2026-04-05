@@ -39,6 +39,8 @@ public class MouseController : MonoBehaviour
     private bool isPull = false;
     private bool _startCoolDown = false;
 
+    public IngameUI ingame;
+
     private float _currentTimeCooldown;
 
     void Start()
@@ -114,6 +116,9 @@ public class MouseController : MonoBehaviour
         if (!_startCoolDown) return;
         
         _currentTimeCooldown -= Time.deltaTime;
+        
+
+
         if (_currentTimeCooldown <= 0f)
         {
             SizeToSmall(true);
@@ -122,6 +127,7 @@ public class MouseController : MonoBehaviour
         if (!isSmall&& Input.GetKeyDown(KeyCode.F))
         {
             SizeToSmall(true);
+            ingame.TimerStop();
         }
     }
     
@@ -152,6 +158,8 @@ public class MouseController : MonoBehaviour
         SizeToSmall(false);
         _startCoolDown = true;
         _currentTimeCooldown = sizeCoolDown;
+        ingame.TimerUpdate();
+        //ingame.TimerUpdate(_currentTimeCooldown, Time.deltaTime);
     }
 
     private void OnPlayerOutOfZone()

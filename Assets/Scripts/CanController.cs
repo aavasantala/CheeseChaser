@@ -5,13 +5,15 @@ public class CanController : MonoBehaviour
     public GameObject can;
     Collider m_ObjectCollider;
 
+    public MouseController mouseController;
+
     void Start()
     {
         m_ObjectCollider = GetComponent<Collider>();
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && mouseController.isSmall==false)
         {
             MakeCanFall();
         }

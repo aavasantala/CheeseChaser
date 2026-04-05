@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     [Header("UI Objects")] 
     [SerializeField] private UIDocument inGameUI;
     [SerializeField] private UIDocument levelCompletedUI;
+    [SerializeField] private UIDocument pauseUI;
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class UIManager : MonoBehaviour
     {
         inGameUI.rootVisualElement.style.display = DisplayStyle.None;
         levelCompletedUI.rootVisualElement.style.display = DisplayStyle.None;
+        pauseUI.rootVisualElement.style.display = DisplayStyle.None;
     }
 
 
@@ -38,6 +40,12 @@ public class UIManager : MonoBehaviour
         HideAllUI();
         levelCompletedUI.rootVisualElement.style.display = DisplayStyle.Flex;
     }
+
+    public void ShowPauseUI(bool show)
+    {
+        HideAllUI();
+        pauseUI.rootVisualElement.style.display= DisplayStyle.Flex;
+    }
     
     private void OnGameStateChange(GameManager.GameState state)
     {
@@ -50,14 +58,16 @@ public class UIManager : MonoBehaviour
                 ShowInGameUI(true);
                 break;
             case GameManager.GameState.GamePause:
-                // TODO: Implemented game pause UI here
+                ShowPauseUI(true);
                 break;
             default:
-                Debug.LogWarning($"Current game state {state} does not implemented");
+                Debug.LogWarning($"Current game state {state} is not implemented");
                 break;
         }
     }
 
     public UIDocument GetInGameUI() => inGameUI;
     public UIDocument GetEndGameUI() => levelCompletedUI;
+
+    public UIDocument GetPauseUI() => pauseUI;
 }

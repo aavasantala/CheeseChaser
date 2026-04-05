@@ -33,7 +33,7 @@ public class MouseController : MonoBehaviour
     private CharacterController characterController;
     private Vector3 velocity;
     private bool isGrounded;
-    private bool isSmall = true;
+    public bool isSmall = true;
     private Camera mainCam;
     private bool canLook = true;
     private bool isPull = false;

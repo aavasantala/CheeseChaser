@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
@@ -16,6 +17,15 @@ public class GameManager : MonoBehaviour
     }
     public UnityAction<GameState> OnGameStateChange;
     private GameState _currentGameState;
+
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            CurrentGameState = GameState.GamePause;
+        }
+    }
 
     private void Awake()
     {

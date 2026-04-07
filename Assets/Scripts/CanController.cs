@@ -4,6 +4,7 @@ public class CanController : MonoBehaviour
 {
     public GameObject can;
     Collider m_ObjectCollider;
+    public Collider cheaterCollider;
 
     public MouseController mouseController;
 
@@ -15,6 +16,7 @@ public class CanController : MonoBehaviour
     {
         if (other.tag == "Player" && mouseController.isSmall==false)
         {
+            Debug.Log("can has been touched");
             MakeCanFall();
         }
 
@@ -33,7 +35,7 @@ public class CanController : MonoBehaviour
         this.transform.position = canPos;
         this.transform.Rotate(canRot);
         m_ObjectCollider.isTrigger = false;
-
+        cheaterCollider.enabled = false;
 
     }
 }

@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: f088e499d02d56c4e89a6ffeaf71c482
+guid: 7f81de29875221e4381995a7457ebd6a
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: red
+    second: {fileID: 2100000, guid: 0a995273abcdbed4ca430e88d4beb235, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: book_red
+    second: {fileID: 2800000, guid: ac4b4ae8aaf373c42aedd807abf09a47, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

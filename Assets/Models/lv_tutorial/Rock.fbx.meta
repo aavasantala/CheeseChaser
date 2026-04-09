@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5dc70a263dcdcf34a8d9985e52459cda
+guid: aabcb18cb292f0f489c4aa92361f308a
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,8 +7,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: red
-    second: {fileID: 2100000, guid: 42b1c3cfa8c9573479485b593c814dd0, type: 2}
+      name: defaultMat
+    second: {fileID: 2100000, guid: 90fd2f0360ebfdf41a7fb2c8ab5dbbf0, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: rock_LP_defaultMat_BaseColor
+    second: {fileID: 2800000, guid: 3585138064027064ea85588627b3efcf, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: rock_LP_defaultMat_Normal
+    second: {fileID: 2800000, guid: ea626af9f0a6eb940866057311ae8d41, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: rock_LP_defaultMat_Roughness
+    second: {fileID: 2800000, guid: bee384ce00955aa44a7414ae5b9aff25, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

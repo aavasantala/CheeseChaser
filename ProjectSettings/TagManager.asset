@@ -19,7 +19,7 @@ TagManager:
   - UI
   - Walls
   - Movable
-  - 
+  - Fade
   - 
   - 
   - 
@@ -44,8 +44,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: fade
+    uniqueID: 3632888993
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: New Layer 2
+    uniqueID: 4064695893
     locked: 0
   m_RenderingLayers:
   - Default

@@ -13,7 +13,7 @@ public class MouseInteractor : MonoBehaviour
     public float cameraLookSpeed = 5f;   // smooth look at target
 
     [Header("Interaction Settings")]
-    public float interactRange = 2.5f;
+    public float interactRange = 20f;
     public float pushPullSpeed = 2f;
     public float interactBreakDistance = 4f;
     public LayerMask interactMask;
@@ -81,14 +81,15 @@ public class MouseInteractor : MonoBehaviour
             {
                 if(!currentRb) currentRb = hit.collider.attachedRigidbody;
                 if (_isPull) PullObject(currentRb);
-                canInteract = !isSmall;
-            }
+                canInteract = !isSmall;            }
             else
             {
                 currentRb = null;
             }
         }
         _inGameUI?.SetCanInteract(canInteract);
+        //Debug.Log("HIIIIIIII!");
+        //Debug.Log(canInteract);
     }
     
     #region Legacy

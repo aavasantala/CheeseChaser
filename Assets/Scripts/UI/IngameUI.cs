@@ -20,12 +20,13 @@ public class IngameUI : MonoBehaviour
 
     private void OnEnable()
     {
+
         var root = GetComponent<UIDocument>().rootVisualElement;
         
         _crosshair = root.Q<VisualElement>("crosshair");
         _progress = root.Q<ProgressBar>("mouseTimer");
-        
-        
+
+        _crosshair.style.opacity = 0;
         Debug.Log("Helloooo!");
         if (defaultCrosshair != null)
         {
@@ -37,6 +38,7 @@ public class IngameUI : MonoBehaviour
     {
         LevelManager.Instance.onMushroomNumberChange += UpdateMushroomCount;
         _progress.style.opacity = 0;
+        _crosshair.style.opacity = 1;
     }
 
     private void Update()

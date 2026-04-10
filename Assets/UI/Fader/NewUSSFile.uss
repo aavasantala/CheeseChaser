@@ -1,0 +1,8 @@
+VisualElement {
+}
+
+.unity-image {
+	transition-property: opacity, translate, visibility;
+	transition-duration: 2s;
+	transition-timing-function: ease;
+}

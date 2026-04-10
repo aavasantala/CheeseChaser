@@ -1,11 +1,16 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class LevelCompletedUI : MonoBehaviour
 {
     [Header("Assign the UIDocument (the component that uses your UXML)")]
     [SerializeField] private UIDocument uiDocument;
+
+    public UIDocument Fader;
+    public Image fade;
+    public int state;
 
     private VisualElement root;
     private Button btnRestart;
@@ -51,6 +56,9 @@ public class LevelCompletedUI : MonoBehaviour
 
         // Hide by default
         root.style.display = DisplayStyle.None;
+
+        var roost = Fader.rootVisualElement;
+        fade = roost.Q<Image>("fade");
     }
 
     private void OnDisable()
@@ -70,7 +78,7 @@ public class LevelCompletedUI : MonoBehaviour
 
         Time.timeScale = 0f;
 
-        // unlock cursor for clicking UI - fully qualify to avoid ambiguity
+        // unlock cursor for clicking UI
         UnityEngine.Cursor.lockState = CursorLockMode.None;
         UnityEngine.Cursor.visible = true;
     }
@@ -90,21 +98,63 @@ public class LevelCompletedUI : MonoBehaviour
 
     private void RestartLevel()
     {
+        state = 1;
         Debug.Log("Restart level");
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        float duration = 2f;
+        StartCoroutine(waiter(duration,state));
+        
     }
 
     private void GoToMainMenu()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
+        state = 2;
+        float duration = 2f;
+        StartCoroutine(waiter(duration, state));
     }
     //this needs to refer to the next level
     private void NextLevel()
     {
-        Debug.Log("[LevelCompletedUI] Next Level button pressed. Not implemented.");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        state = 3;
+        float duration = 2f;
+        StartCoroutine(waiter(duration, state));
+    }
+
+    IEnumerator waiter(float duration, int state)
+    {
         Time.timeScale = 1f;
+        fade.style.opacity = 1;
+        Debug.Log($"Started at {Time.time}, waiting for {duration} seconds");
+        yield return new WaitForSeconds(duration);
+        Debug.Log($"Ended at {Time.time}");
+        
+        
+
+        switch (state) 
+        {
+            case 1:
+                Debug.Log("Reeeestart");
+                Time.timeScale = 1f;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                break;
+
+            case 2:
+                Time.timeScale = 1f;
+                SceneManager.LoadScene("MainMenu");
+                break;
+
+            case 3:
+                Debug.Log("[LevelCompletedUI] Next Level button pressed. Not implemented.");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                Time.timeScale = 1f;
+                break;
+
+            default:
+                Debug.Log("Error, state invalid -> " + state);
+                Time.timeScale = 1f;
+                SceneManager.LoadScene("MainMenu");
+                break;
+
+        }
+
     }
 }

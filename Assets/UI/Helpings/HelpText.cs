@@ -6,6 +6,9 @@ public class HelpText : MonoBehaviour
 {
     public Label helpText;
     public MouseController mouseController;
+
+    public Boolean canMoved;
+
     int done1 = 0;
     int done2 = 0;
     int done3 = 0;
@@ -67,7 +70,7 @@ public class HelpText : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && mouseController.isSmall)
+        if (other.CompareTag("Player") && mouseController.isSmall && canMoved == false)
         {
             CrackText();
         }

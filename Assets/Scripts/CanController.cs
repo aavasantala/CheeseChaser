@@ -5,7 +5,6 @@ using UnityEngine.UIElements;
 
 public class CanController : MonoBehaviour
 {
-
     public Boolean moved = false;
     public UIDocument Fader;
     public GameObject can;
@@ -14,20 +13,17 @@ public class CanController : MonoBehaviour
     public Image fade;
     public MouseController mouseController;
     public HelpText helpText;
-    
 
     void Start()
     {
         m_ObjectCollider = GetComponent<Collider>();
         var root = Fader.rootVisualElement;
-        fade = root.Q<Image>("fade");
-        
-        
-        
+        fade = root.Q<Image>("fade"); 
     }
 
     private void Update()
     {
+        //if can hasn't been moved and mouse is small, the can acts as a full collider instead of a trigger, else -> it is a trigger
         if (!moved)
         {
             if (mouseController.isSmall)
@@ -38,66 +34,56 @@ public class CanController : MonoBehaviour
             {
                 m_ObjectCollider.isTrigger = true;
             }
-        }
-        
-        
+        }  
     }
     private void OnTriggerEnter(Collider other)
     {
-
-        
         if (other.CompareTag("Player") && !mouseController.isSmall)
         {
-            
+            //disables player input
             Debug.Log("can has been touched");
-            mouseController.enabled = false;
-            MakeCanFall();
+            helpText.canMoved = true;
             moved = true;
+            mouseController.enabled = false;
+            //this could be removed, just put the startcoroutine here
+            MakeCanFall();
+
+            //change can state to moved, making sure that colliders, help texts etc are taken caren of
+            
         }
-
-
     }
 
     void MakeCanFall()
     {
-
-        
-        
-        
-        
-
+        //this triggers a fade out, fade in where the can moves
         StartCoroutine(waiter(1f));
-        
-        
-        
-
-        
-        
     }
     IEnumerator waiter(float duration)
     {
-        
+        //fade is thing that makes the fade
         fade.style.opacity = 0;
         yield return null;
 
+        //turn screen black
         fade.style.opacity = 1;
         yield return new WaitForSeconds(1f);
+
+        //change position of can
         Vector3 canPos = Vector3.zero;
         Vector3 canRot = Vector3.zero;
         canPos.x = 8.727f; canPos.y = 1.842f; canPos.z = 7.27f;
         canRot.x = 0f; canRot.y = 0f; canRot.z = 90f;
-
         this.transform.position = canPos;
         this.transform.Rotate(canRot);
+
+        //disable the trigger for can & turn off the invisible wall over the crack
         m_ObjectCollider.isTrigger = false;
         cheaterCollider.enabled = false;
         yield return new WaitForSeconds(1f);
+
+        //screen back to normal, player inputs are back
         fade.style.opacity = 0;
         mouseController.enabled = true;
         yield return new WaitForSeconds(1f);
-
-        
-
-
     }
 }

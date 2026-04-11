@@ -15,7 +15,7 @@ public class MouseInteractor : MonoBehaviour
     [Header("Interaction Settings")]
     public float interactRange = 20f;
     public float pushPullSpeed = 2f;
-    public float interactBreakDistance = 4f;
+    public float interactBreakDistance = 25f;
     public LayerMask interactMask;
 
     private CharacterController controller;
@@ -77,6 +77,7 @@ public class MouseInteractor : MonoBehaviour
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, interactRange, interactMask))
         {
+            //Debug.Log(hit.collider.tag);
             if (hit.collider.CompareTag("Interactable"))
             {
                 if(!currentRb) currentRb = hit.collider.attachedRigidbody;

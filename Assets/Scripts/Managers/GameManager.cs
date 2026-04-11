@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public UIDocument Fader;
     public Image fade;
+
+    public MouseController mouseController;
     public static GameManager Instance { get; private set; }
     public enum GameState { Gameplay, GamePause, GameEnd }
     public GameState CurrentGameState
@@ -46,6 +48,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        mouseController.enabled = true;
         Fader.enabled = true;
         var roost = Fader.rootVisualElement;
         fade = roost.Q<Image>("fade");

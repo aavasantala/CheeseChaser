@@ -1,15 +1,20 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class CanController : MonoBehaviour
 {
+
+    public Boolean moved = false;
     public UIDocument Fader;
     public GameObject can;
     Collider m_ObjectCollider;
     public Collider cheaterCollider;
     public Image fade;
     public MouseController mouseController;
+    public HelpText helpText;
+    
 
     void Start()
     {
@@ -17,6 +22,23 @@ public class CanController : MonoBehaviour
         var root = Fader.rootVisualElement;
         fade = root.Q<Image>("fade");
         
+        
+        
+    }
+
+    private void Update()
+    {
+        if (!moved)
+        {
+            if (mouseController.isSmall)
+            {
+                m_ObjectCollider.isTrigger = false;
+            }
+            else
+            {
+                m_ObjectCollider.isTrigger = true;
+            }
+        }
         
         
     }
@@ -28,7 +50,9 @@ public class CanController : MonoBehaviour
         {
             
             Debug.Log("can has been touched");
+            mouseController.enabled = false;
             MakeCanFall();
+            moved = true;
         }
 
 
@@ -45,8 +69,7 @@ public class CanController : MonoBehaviour
         StartCoroutine(waiter(1f));
         
         
-        m_ObjectCollider.isTrigger = false;
-        cheaterCollider.enabled = false;
+        
 
         
         
@@ -66,8 +89,11 @@ public class CanController : MonoBehaviour
 
         this.transform.position = canPos;
         this.transform.Rotate(canRot);
+        m_ObjectCollider.isTrigger = false;
+        cheaterCollider.enabled = false;
         yield return new WaitForSeconds(1f);
         fade.style.opacity = 0;
+        mouseController.enabled = true;
         yield return new WaitForSeconds(1f);
 
         

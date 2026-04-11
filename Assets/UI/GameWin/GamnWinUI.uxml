@@ -1,9 +1,12 @@
 <ui:UXML xmlns="UnityEngine.UIElements" xmlns:ui="UnityEngine.UIElements" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="UnityEngine.UIElements/UXMLSchema.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/GameWin/LevelComplete.uss?fileID=7433441132597879392&amp;guid=71ab91c1cf48c374498df2ac82a5fb29&amp;type=3#LevelComplete"/>
-    <ui:VisualElement name="root" class="root">
-        <ui:Label name="levelCompleteText" text="Level Completed!" class="title" style="scale: 2 2; top: -157px;"/>
-        <ui:Button name="btnRestart" text="Restart" class="button" style="scale: 2 2; top: -101px;"/>
-        <ui:Button name="btnMainMenu" text="Main Menu" class="button" style="scale: 2 2; top: -43px;"/>
-        <ui:Button name="btnNextLevel" text="Next Level" class="button" style="scale: 2 2; top: 13px;"/>
+    <ui:VisualElement name="root" class="root" style="background-color: rgba(0, 0, 0, 0);">
+        <ui:VisualElement name="screen" style="flex-grow: 1; position: absolute; width: 1647px; left: 140px; height: 837px; top: 119px; background-image: resource(&quot;BackG&quot;); transition-property: scale; transition-duration: 1s; transition-timing-function: ease; transition-delay: 0s;">
+            <ui:Label name="levelCompleteText" text="Level Completed!" class="title" style="scale: 2 2; top: 62px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/Spicy%20Sale.ttf?fileID=12800000&amp;guid=71db7e7139864d8499eb356a1aba552d&amp;type=3#Spicy Sale&quot;); color: rgb(75, 60, 60); font-size: 53px;"/>
+            <ui:Button name="btnRestart" text="" double-click-selects-word="false" triple-click-selects-line="false" class="button" style="top: 470px; align-self: center; height: 74px; background-image: resource(&quot;restart&quot;); left: -442px; transition-property: all, scale; transition-duration: 0s, 0.4s; transition-timing-function: ease, ease; transition-delay: 0s, 0s;"/>
+            <ui:Button name="btnMainMenu" text="" double-click-selects-word="false" triple-click-selects-line="false" class="button" style="top: 140px; height: 74px; left: 1052px; background-image: resource(&quot;mainemnyu&quot;); transition-property: all, scale; transition-duration: 0s, 0.4s; transition-timing-function: ease, ease; transition-delay: 0s, 0s;"/>
+            <ui:Button name="btnNextLevel" text="" double-click-selects-word="false" triple-click-selects-line="false" icon-image="" class="button" style="top: 54px; align-self: center; background-image: resource(&quot;nextlvl&quot;); height: 74px; left: -442px; transition-duration: 0.4s; transition-property: scale;"/>
+            <ui:Button name="btnQuitGame" text="" double-click-selects-word="false" triple-click-selects-line="false" class="button" style="top: 215px; height: 74px; left: 1052px; background-image: resource(&quot;quitgame&quot;); transition-property: all, scale; transition-duration: 0s, 0.4s; transition-timing-function: ease, ease; transition-delay: 0s, 0s;"/>
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

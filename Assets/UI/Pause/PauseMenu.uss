@@ -2,8 +2,12 @@ VisualElement {
 }
 
 .unity-button {
+    transition-property: all, scale;
+    transition-duration: 0s, 0.5s;
+    transition-timing-function: ease, ease;
+    transition-delay: 0s, 0s;
 }
 
 .unity-button:hover {
-	scale: 1.2;
+    scale: 1.2;
 }

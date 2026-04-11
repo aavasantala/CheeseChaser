@@ -16,10 +16,14 @@ public class LevelCompletedUI : MonoBehaviour
     private Button btnRestart;
     private Button btnMainMenu;
     private Button btnNextLevel;
+    private VisualElement screen;
+
+    public MouseController mouseController;
 
     private const string restartName = "btnRestart";
     private const string mainMenuName = "btnMainMenu";
     private const string nextLevelName = "btnNextLevel";
+
 
     private void Awake()
     {
@@ -43,6 +47,7 @@ public class LevelCompletedUI : MonoBehaviour
         btnRestart = root.Q<Button>(restartName);
         btnMainMenu = root.Q<Button>(mainMenuName);
         btnNextLevel = root.Q<Button>(nextLevelName);
+        screen = root.Q<VisualElement>("screen");
 
         // Safety checks and assign handlers
         if (btnRestart != null) btnRestart.clicked += RestartLevel;
@@ -56,6 +61,7 @@ public class LevelCompletedUI : MonoBehaviour
 
         // Hide by default
         root.style.display = DisplayStyle.None;
+        //root.style.scale = new Scale(new Vector3(0.3f, 0.3f, 0.3f));
 
         var roost = Fader.rootVisualElement;
         fade = roost.Q<Image>("fade");
@@ -72,15 +78,15 @@ public class LevelCompletedUI : MonoBehaviour
     /// <summary>Show the Level Completed UI and pause the game.</summary>
     public void Show()
     {
+        
         if (root == null) return;
+        
+        StartCoroutine(showUI(0.1f, 0));
 
-        root.style.display = DisplayStyle.Flex;
+        
 
-        Time.timeScale = 0f;
-
-        // unlock cursor for clicking UI
-        UnityEngine.Cursor.lockState = CursorLockMode.None;
-        UnityEngine.Cursor.visible = true;
+        
+        
     }
 
     /// <summary>Hide the UI and resume the game.</summary>
@@ -88,12 +94,8 @@ public class LevelCompletedUI : MonoBehaviour
     {
         if (root == null) return;
 
-        root.style.display = DisplayStyle.None;
-
-        Time.timeScale = 1f;
-
-        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-        UnityEngine.Cursor.visible = false;
+        StartCoroutine(showUI(0.1f, 1));
+        
     }
 
     private void RestartLevel()
@@ -101,6 +103,7 @@ public class LevelCompletedUI : MonoBehaviour
         state = 1;
         Debug.Log("Restart level");
         float duration = 2f;
+        mouseController.enabled = false;
         StartCoroutine(waiter(duration,state));
         
     }
@@ -109,6 +112,7 @@ public class LevelCompletedUI : MonoBehaviour
     {
         state = 2;
         float duration = 2f;
+        mouseController.enabled = false;
         StartCoroutine(waiter(duration, state));
     }
     //this needs to refer to the next level
@@ -116,7 +120,50 @@ public class LevelCompletedUI : MonoBehaviour
     {
         state = 3;
         float duration = 2f;
+        mouseController.enabled = false;
         StartCoroutine(waiter(duration, state));
+    }
+    IEnumerator showUI(float duration, int states)
+    {
+        float elapsed0 = 0f;
+        float interval = 0.016f;
+        switch (states)
+        {
+            
+            case 0:
+                root.style.display = DisplayStyle.Flex;
+                
+                while (elapsed0 < duration)
+                {
+                    elapsed0 += interval;
+                    float t0 = Mathf.Clamp01(elapsed0 / duration);
+                    float s0 = Mathf.Lerp(0.3f, 1f, t0);
+                    root.style.scale = new Scale(new Vector3(s0, s0, s0));
+                    yield return new WaitForSecondsRealtime(interval);
+                }
+                root.style.scale = new Scale(new Vector3(1f, 1f, 1f));
+                Time.timeScale = 0f;
+                UnityEngine.Cursor.lockState = CursorLockMode.None;
+                UnityEngine.Cursor.visible = true;
+                break;
+
+            case 1:
+                Time.timeScale = 1f;
+                float elapsed1 = 0f;
+                while (elapsed1 < duration)
+                {
+                    elapsed1 += interval;
+                    float t1 = Mathf.Clamp01(elapsed1 / duration);
+                    float s1 = Mathf.Lerp(1f, 0.3f, t1);
+                    root.style.scale = new Scale(new Vector3(s1, s1, s1));
+                    yield return new WaitForSecondsRealtime(interval);
+                }
+                root.style.scale = new Scale(new Vector3(0.3f, 0.3f, 0.3f));
+                root.style.display = DisplayStyle.None;
+                UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+                UnityEngine.Cursor.visible = false;
+                break;
+        }
     }
 
     IEnumerator waiter(float duration, int state)
@@ -147,6 +194,8 @@ public class LevelCompletedUI : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 Time.timeScale = 1f;
                 break;
+
+            
 
             default:
                 Debug.Log("Error, state invalid -> " + state);

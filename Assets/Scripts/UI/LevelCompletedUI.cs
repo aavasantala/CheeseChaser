@@ -16,6 +16,7 @@ public class LevelCompletedUI : MonoBehaviour
     private Button btnRestart;
     private Button btnMainMenu;
     private Button btnNextLevel;
+    private Button btnExitGame;
     private VisualElement screen;
 
     public MouseController mouseController;
@@ -47,6 +48,7 @@ public class LevelCompletedUI : MonoBehaviour
         btnRestart = root.Q<Button>(restartName);
         btnMainMenu = root.Q<Button>(mainMenuName);
         btnNextLevel = root.Q<Button>(nextLevelName);
+        btnExitGame = root.Q<Button>("btnQuitGame");
         screen = root.Q<VisualElement>("screen");
 
         // Safety checks and assign handlers
@@ -58,6 +60,9 @@ public class LevelCompletedUI : MonoBehaviour
 
         if (btnNextLevel != null) btnNextLevel.clicked += NextLevel;
         else Debug.LogError($"[LevelCompletedUI] Button '{nextLevelName}' not found in UXML.");
+
+        if (btnExitGame != null) btnExitGame.clicked += ExitGame;
+        else Debug.LogError($"[LevelCompletedUI] Button '{btnExitGame}' not found in UXML.");
 
         // Hide by default
         root.style.display = DisplayStyle.None;
@@ -73,6 +78,7 @@ public class LevelCompletedUI : MonoBehaviour
         if (btnRestart != null) btnRestart.clicked -= RestartLevel;
         if (btnMainMenu != null) btnMainMenu.clicked -= GoToMainMenu;
         if (btnNextLevel != null) btnNextLevel.clicked -= NextLevel;
+        if (btnExitGame != null) btnExitGame.clicked -= ExitGame;
     }
 
     /// <summary>Show the Level Completed UI and pause the game.</summary>
@@ -119,6 +125,14 @@ public class LevelCompletedUI : MonoBehaviour
     private void NextLevel()
     {
         state = 3;
+        float duration = 2f;
+        mouseController.enabled = false;
+        StartCoroutine(waiter(duration, state));
+    }
+
+    private void ExitGame()
+    {
+        state = 4;
         float duration = 2f;
         mouseController.enabled = false;
         StartCoroutine(waiter(duration, state));
@@ -193,6 +207,10 @@ public class LevelCompletedUI : MonoBehaviour
                 Debug.Log("[LevelCompletedUI] Next Level button pressed. Not implemented.");
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 Time.timeScale = 1f;
+                break;
+
+            case 4:
+                Application.Quit();
                 break;
 
             

@@ -1621,7 +1621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MushScript
   coolDown: 20
-  mushroomModel: {fileID: 1819494863843649991}
+  mushroomModel: {fileID: 919132149155446097, guid: 190f028cbe3006a4da6a1af9202be1df, type: 3}
   timerFill: {fileID: 4318570477926703655}
 --- !u!65 &6311347457364921533
 BoxCollider:

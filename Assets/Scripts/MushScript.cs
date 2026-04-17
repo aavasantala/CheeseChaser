@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +16,8 @@ public class MushScript : MonoBehaviour
     private Collider _collider;
     private bool _startCoolDown = false;
     private float _currentTimeCoolDown;
+
+    public AudioSource source;
 
     private void Awake()
     {
@@ -47,7 +50,9 @@ public class MushScript : MonoBehaviour
         _currentTimeCoolDown = coolDown;
         _startCoolDown = true;
         _collider.enabled = false;
-        
+
+        StartCoroutine(soundPlay());
+
         mushroomModel.SetActive(false);
 
         timerFill.enabled = true;
@@ -60,5 +65,16 @@ public class MushScript : MonoBehaviour
         _collider.enabled = true;
         timerFill.enabled = false;
         mushroomModel.SetActive(true);
+    }
+
+    public IEnumerator soundPlay()
+    {
+        source.Play();
+        yield return new WaitForEndOfFrame();
+        mushroomModel.SetActive(false);
+
+        timerFill.enabled = true;
+        LevelManager.Instance.MushroomNumber++;
+        LevelManager.Instance.onMushroomTaken?.Invoke();
     }
 }

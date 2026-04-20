@@ -228,6 +228,7 @@ MonoBehaviour:
   coolDown: 15
   mushroomModel: {fileID: 919132149155446097, guid: 190f028cbe3006a4da6a1af9202be1df, type: 3}
   timerFill: {fileID: 7251202595306259857}
+  source: {fileID: 0}
 --- !u!65 &6827237244840818095
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -258,7 +259,7 @@ AudioSource:
   m_GameObject: {fileID: 4197608514550119122}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -432490126459679773, guid: 8b8f22452ab07d3428a8aa8419f994b3, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 01456d02f91f9bd47885568e6003c139, type: 3}
   m_PlayOnAwake: 0

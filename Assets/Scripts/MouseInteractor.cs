@@ -82,7 +82,12 @@ public class MouseInteractor : MonoBehaviour
             {
                 if(!currentRb) currentRb = hit.collider.attachedRigidbody;
                 if (_isPull) PullObject(currentRb);
-                canInteract = !isSmall;            }
+                canInteract = !isSmall; 
+            }
+            else if (hit.collider.CompareTag("FallCan"))
+            {
+                canInteract = !isSmall;
+            }
             else
             {
                 currentRb = null;

@@ -16,10 +16,14 @@ public class MushScript : MonoBehaviour
     private bool _startCoolDown = false;
     private float _currentTimeCoolDown;
 
+    private AudioSource _audioSource;
+
+
     private void Awake()
     {
         _collider = GetComponent<Collider>();
         timerFill.enabled = false;
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -38,6 +42,7 @@ public class MushScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            _audioSource.Play();
             DispawnMushroom();
         } 
     }

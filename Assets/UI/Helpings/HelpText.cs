@@ -48,7 +48,7 @@ public class HelpText : MonoBehaviour
         
         if (done2 <= 1)
         {
-            helpText.text = "I bet I can knock this over!";
+            helpText.text = "I bet I can push this down!";
             done2++;
         }
     }
@@ -57,7 +57,7 @@ public class HelpText : MonoBehaviour
     {
         if (done3 <= 1)
         {
-            helpText.text = "This can-sized crack is so annoying.. Can't get over it like this.";
+            helpText.text = "This cereal box-sized crack is so annoying.. Can't get over it like this.";
             done3++;
         }
         

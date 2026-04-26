@@ -48,7 +48,7 @@ public class CanController : MonoBehaviour
             //this could be removed, just put the startcoroutine here
             MakeCanFall();
 
-            //change can state to moved, making sure that colliders, help texts etc are taken caren of
+            
             
         }
     }
@@ -68,13 +68,19 @@ public class CanController : MonoBehaviour
         fade.style.opacity = 1;
         yield return new WaitForSeconds(1f);
 
-        //change position of can
+        //og position of the cereal box
+        //4.151 5.585 2.146   rot  -.178.455 46.97 90   scale  40.77999
+
+        //new
+        //1 1.87 -2.15  rot  -178.455 6.93 90 scale 36.3 48.6 58
+
+        //change position
         Vector3 canPos = Vector3.zero;
         Vector3 canRot = Vector3.zero;
-        canPos.x = 8.727f; canPos.y = 1.842f; canPos.z = 7.27f;
-        canRot.x = 0f; canRot.y = 0f; canRot.z = 90f;
-        this.transform.position = canPos;
-        this.transform.Rotate(canRot);
+        canPos.x = 1f; canPos.y = 1.87f; canPos.z = -2.15f;
+        canRot.x = -178.455f; canRot.y = 6.93f; canRot.z = 90f;
+        this.transform.localPosition = canPos;
+        this.transform.localEulerAngles = canRot;
 
         //disable the trigger for can & turn off the invisible wall over the crack
         m_ObjectCollider.isTrigger = false;

@@ -64,6 +64,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 2567867a58911024c990720fdb8bdbb7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 32655c464ecf9d84bb3a1ea0993850b4, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 2567867a58911024c990720fdb8bdbb7, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5fd4612094c6620458ef2060d3fdc709, type: 2}
     - target: {fileID: 919132149155446097, guid: 2567867a58911024c990720fdb8bdbb7, type: 3}
       propertyPath: m_Name
       value: wallFlat

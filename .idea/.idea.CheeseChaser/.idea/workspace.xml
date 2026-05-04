@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4634e113-20a1-4dc0-8ee5-d15d044ec95b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CheeseChaser/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CheeseChaser/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/BuildScenes/Level1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/BuildScenes/Level1.unity" afterDir="false" />
-    </list>
+    <list default="true" id="4634e113-20a1-4dc0-8ee5-d15d044ec95b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -93,7 +90,7 @@
       <workItem from="1774613920952" duration="5000" />
       <workItem from="1774614728076" duration="5306000" />
       <workItem from="1777810156722" duration="1469000" />
-      <workItem from="1777925323315" duration="1906000" />
+      <workItem from="1777925323315" duration="2729000" />
     </task>
     <servers />
   </component>

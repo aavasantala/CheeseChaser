@@ -200,6 +200,7 @@ GameObject:
   - component: {fileID: 579873091}
   - component: {fileID: 579873092}
   - component: {fileID: 579873093}
+  - component: {fileID: 579873094}
   m_Layer: 0
   m_Name: Settings
   m_TagString: Untagged
@@ -260,6 +261,18 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 8b8f22452ab07d3428a8aa8419f994b3, type: 2}
   group: []
   mainMenuDoc: {fileID: 6898241}
+--- !u!114 &579873094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579873090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 304960b19598fae44b9329cf9a8991cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SliderScript
 --- !u!1 &632272176
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,7 +329,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0

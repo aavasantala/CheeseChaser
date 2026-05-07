@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public UIDocument Fader;
     public Image fade;
+    public Tutorial tutorial;
 
     public MouseController mouseController;
     public static GameManager Instance { get; private set; }
@@ -110,8 +111,8 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Ended at {Time.time}");
         fade.style.opacity = 0;
         yield return new WaitForSeconds(duration);
-        
 
+        tutorial.StartTutorial();
     }
 }
 

@@ -23,11 +23,11 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.OnGameStateChange += OnGameStateChange;
-        ShowInGameUI(true);
+        HideAllUI();
         inGameUI.rootVisualElement.pickingMode = PickingMode.Ignore;
     }
 
-    private void HideAllUI()
+    public void HideAllUI()
     {
         StartCoroutine(AnimateScaleOut(levelCompletedUI.rootVisualElement));
         StartCoroutine(AnimateScaleOut(pauseUI.rootVisualElement));

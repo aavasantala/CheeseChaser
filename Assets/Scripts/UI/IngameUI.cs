@@ -10,13 +10,13 @@ public class IngameUI : MonoBehaviour
     
     public PanelSettings panelSettings;
     public MouseController mouseController;
-
+    public ClockWipeController clockWipe;
     public Boolean timerOn = false;
     public float timer=0f;
 
     private Label _mushroomCounter;
     private VisualElement _crosshair;
-    private ProgressBar _progress;
+    private VisualElement _bigMouse;
 
     private void OnEnable()
     {
@@ -24,8 +24,9 @@ public class IngameUI : MonoBehaviour
         var root = GetComponent<UIDocument>().rootVisualElement;
         
         _crosshair = root.Q<VisualElement>("crosshair");
-        _progress = root.Q<ProgressBar>("mouseTimer");
+        _bigMouse = root.Q<VisualElement>("bigMouse");
 
+        _bigMouse.style.opacity = 0;
         _crosshair.style.opacity = 0;
         Debug.Log("Helloooo!");
         if (defaultCrosshair != null)
@@ -37,7 +38,7 @@ public class IngameUI : MonoBehaviour
     private void Start()
     {
         LevelManager.Instance.onMushroomNumberChange += UpdateMushroomCount;
-        _progress.style.opacity = 0;
+        
         _crosshair.style.opacity = 1;
     }
 
@@ -81,8 +82,9 @@ public class IngameUI : MonoBehaviour
     public void TimerUpdate()
     {
         timerOn = true;
+        _bigMouse.style.opacity = 1;
         timer = 15f;
-        _progress.style.opacity = 1;
+        
     }
 
     public void TimerStop()
@@ -93,10 +95,10 @@ public class IngameUI : MonoBehaviour
     public void Timer()
     {
         timer-=Time.deltaTime;
-        _progress.value = timer;
+        clockWipe.SetTime(timer, 15f);
         if (timer <= 0)
         {
-            _progress.style.opacity = 0;
+            _bigMouse.style.opacity = 0;
             timerOn = false;
         }
     }

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 437c54c914953cb4b90bb4e388ebcac4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 216148
+  packageName: Transition Fade With UI Toolkit
+  packageVersion: 1.2.0
+  assetPath: Assets/AlpaSun Fade/Materials/Purple Material.mat
+  uploadId: 599811

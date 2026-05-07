@@ -13,8 +13,8 @@ public class MouseInteractor : MonoBehaviour
     public float cameraLookSpeed = 5f;   // smooth look at target
 
     [Header("Interaction Settings")]
-    public float interactRange = 20f;
-    public float pushPullSpeed = 2f;
+    public float interactRange = 15f;
+    public float pushPullSpeed = 10f;
     public float interactBreakDistance = 25f;
     public LayerMask interactMask;
 
@@ -48,7 +48,7 @@ public class MouseInteractor : MonoBehaviour
 
     void Update()
     {
-        isSmall = movementScript && movementScript.IsSmall();
+        isSmall = movementScript.IsSmall();
         _isPull = Input.GetKey(KeyCode.E);
         
         if (isSmall)
@@ -211,6 +211,7 @@ public class MouseInteractor : MonoBehaviour
     //TODO: (Note) If you want to use the old way of push stuff, you can comment out this one
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
+        Debug.Log(isSmall);
         Rigidbody body = hit.collider.attachedRigidbody;
         if (body == null || body.isKinematic || isSmall || _isPull) return;
         Vector3 pushDirection = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
@@ -220,6 +221,7 @@ public class MouseInteractor : MonoBehaviour
 
     private void PullObject(Rigidbody body)
     {
+        Debug.Log(isSmall);
         if (body == null || body.isKinematic || isSmall) return;
         
         
@@ -230,6 +232,7 @@ public class MouseInteractor : MonoBehaviour
 
     private void PushObject(Rigidbody body, Vector3 direction)
     {
+        Debug.Log(isSmall);
         if (body == null || body.isKinematic || isSmall) return;
         
         body.linearVelocity = direction * pushPullSpeed;

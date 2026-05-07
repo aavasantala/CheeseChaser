@@ -5,10 +5,25 @@ ModelImporter:
   internalIDToNameTable: []
   externalObjects:
   - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 3e1eb978193ef294b87e4007ec430ce4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: aluminum
+    second: {fileID: 2100000, guid: fd26ad95c30ffac4083e0c06e16c5e80, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: image01
+    second: {fileID: 2100000, guid: cceb8f603507e2140b26fbbabe3fa46c, type: 2}
+  - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: 1111111
-    second: {fileID: 2800000, guid: 43ae8f30ab36094428e68220befe52c2, type: 3}
+    second: {fileID: 2800000, guid: 3a09c1f63f4748749810db2abc6694f0, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
